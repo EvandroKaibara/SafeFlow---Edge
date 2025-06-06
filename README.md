@@ -29,7 +29,7 @@ Os dados são publicados em formato JSON no tópico `agua/monitoramento`, podend
 
 ## 🌐 Link importantes
 
-👉 [Acessar simulação Wokwi](https://wokwi.com/projects/https://wokwi.com/projects/432973590739623937) 
+👉 [Acessar simulação Wokwi](https://wokwi.com/projects/432973590739623937) 
 👉 [Acessar vídeo explicativo](https://www.youtube.com/watch?v=mPsRiQh9ca8) 
 
 ## 📦 Formato da Publicação MQTT
