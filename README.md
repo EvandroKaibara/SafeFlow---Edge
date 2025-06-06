@@ -70,5 +70,5 @@ return msg;
 
 ## Autor
 
-Evandro Yuji Kaibara de Olveira RM: 559274
-Mateus da Rocha Mallet RM: 560491
+- Evandro Yuji Kaibara de Olveira RM: 559274
+- Mateus da Rocha Mallet RM: 560491
