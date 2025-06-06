@@ -1,25 +1,39 @@
-# SafeFlow
 
-Este projeto tem o objeto de medir a distância da água até o limite para que comece uma enchente.
+# Monitoramento de Nível com Sensor Ultrassônico e MQTT
 
-## Componentes Utilizados
+## 📌 Descrição do Problema
 
-- ESP32 Devkit
-- Sensor Ultrassônico HC-SR04
-- LEDs (Verde, Amarelo, Vermelho)
-- Resistores
-- Plataforma Wokwi para simulação
-- Broker MQTT (broker.hivemq.com)
-- Node-RED
+O monitoramento de nível de líquidos, como em reservatórios de água, é essencial para garantir o funcionamento adequado de sistemas hidráulicos e evitar desperdícios ou falhas críticas. Uma medição imprecisa ou a falta de alertas visuais pode comprometer toda a operação.
 
-## Lógica de Funcionamento
+## 💡 Solução Proposta
 
-1. O sensor ultrassônico mede a distância.
-2. De acordo com a distância, um LED acende:
-   - **Verde**: > 300 cm → "Tudo certo"
-   - **Amarelo**: entre 100 cm e 300 cm → "Ficar atento"
-   - **Vermelho**: < 100 cm → "Crítico"
-3. Os dados são enviados em formato JSON via MQTT:
+Este projeto utiliza um sensor ultrassônico HC-SR04 conectado a um ESP32 para medir a distância (nível do líquido). O sistema envia os dados em tempo real via protocolo MQTT para um broker público (`broker.hivemq.com`). Além disso, três LEDs indicam visualmente o estado do nível:
+- **Verde**: Nível seguro (> 300 cm)
+- **Amarelo**: Atenção (entre 100 cm e 300 cm)
+- **Vermelho**: Crítico (< 100 cm)
+
+Os dados são publicados em formato JSON no tópico `agua/monitoramento`, podendo ser integrados a um dashboard Node-RED para visualização remota.
+
+## ▶️ Instruções de Execução e Simulação
+
+### Requisitos
+- Conta no [Wokwi](https://wokwi.com)
+- Navegador com acesso à internet
+
+### Passos
+1. Acesse o link do projeto no Wokwi (ver abaixo).
+2. Aguarde a conexão com o Wi-Fi virtual (SSID: `Wokwi-GUEST`, canal 6).
+3. Observe a medição da distância e o acendimento dos LEDs conforme a simulação.
+4. Os dados em JSON são publicados no broker MQTT.
+5. No Node-RED, conecte-se ao mesmo tópico MQTT (`agua/monitoramento`) para receber os dados e montar o dashboard.
+
+## 🌐 Link importantes
+
+👉 [Acessar simulação Wokwi](https://wokwi.com/projects/https://wokwi.com/projects/432973590739623937) 
+👉 [Acessar vídeo explicativo](https://www.youtube.com/watch?v=mPsRiQh9ca8) 
+
+## 📦 Formato da Publicação MQTT
+
 ```json
 {
   "distancia": 97,
@@ -28,47 +42,12 @@ Este projeto tem o objeto de medir a distância da água até o limite para que 
 }
 ```
 
-## Configuração do Wi-Fi no Wokwi
+---
+## Desenvolvedores
 
-Certifique-se de usar o seguinte trecho no `setup_wifi()`:
-```cpp
-WiFi.begin("Wokwi-GUEST", "", 6);  // Canal 6 obrigatório
-```
-
-## Dashboard Node-RED
-
-### Fluxo
-- MQTT IN (topico: `agua/monitoramento`)
-- JSON
-- Function: separa distância e status
-- ui_text: exibe distância
-- ui_text: exibe status com cores (vermelho/lime/laranja)
-
-### Function para distância
-```js
-msg.payload = "Distância: " + msg.payload.distancia + " cm";
-return msg;
-```
-
-### Function para status
-```js
-let status = msg.payload.status;
-msg.payload = "Status do LED: " + status;
-
-if (status === "Crítico") {
-    msg.color = "#ff0000";
-    msg.bold = true;
-} else if (status === "Ficar atento") {
-    msg.color = "#ff9900";
-    msg.bold = true;
-} else {
-    msg.color = "#00cc00";
-    msg.bold = true;
-}
-return msg;
-```
-
-## Autor
-
-- Evandro Yuji Kaibara de Olveira RM: 559274
+- Evandro Yuji Kaibara de Oliveira RM: 559274
 - Mateus da Rocha Mallet RM: 560491
+
+
+Editor: Wokwi  
+Linguagem: C++ (Arduino ESP32)
