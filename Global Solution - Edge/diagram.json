@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "author": "evandro yuji",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-breadboard-half", "id": "bb1", "top": -348.6, "left": -93.2, "attrs": {} },
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "wokwi-led", "id": "led1", "top": -262.8, "left": -44.2, "attrs": { "color": "red" } },
+    { "type": "wokwi-led", "id": "led2", "top": -262.8, "left": -15.4, "attrs": { "color": "yellow" } },
+    { "type": "wokwi-led", "id": "led3", "top": -262.8, "left": 13.4, "attrs": { "color": "green" } },
+    { "type": "wokwi-resistor", "id": "r1", "top": -188.6, "left": -58.45, "rotate": 270, "attrs": { "value": "220" } },
+    { "type": "wokwi-resistor", "id": "r2", "top": -188.6, "left": -29.65, "rotate": 270, "attrs": { "value": "220" } },
+    { "type": "wokwi-resistor", "id": "r3", "top": -188.6, "left": -0.85, "rotate": 270, "attrs": { "value": "220" } },
+    { "type": "wokwi-hc-sr04", "id": "ultrasonic1", "top": -215.7, "left": 346.5, "rotate": 90, "attrs": {} }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "r1:1", "bb1:bn.4", "", [ "$bb" ] ],
+    [ "r1:2", "bb1:5b.h", "", [ "$bb" ] ],
+    [ "r2:1", "bb1:bn.6", "", [ "$bb" ] ],
+    [ "r2:2", "bb1:8b.h", "", [ "$bb" ] ],
+    [ "r3:1", "bb1:bn.9", "", [ "$bb" ] ],
+    [ "r3:2", "bb1:11b.h", "", [ "$bb" ] ],
+    [ "bb1:bn.1", "esp:GND.1", "black", [ "v0" ] ],
+    [ "ultrasonic1:GND", "bb1:bn.25", "black", [ "h0" ] ],
+    [ "ultrasonic1:VCC", "esp:3V3", "red", [ "h-144", "v67.2", "h-235.39" ] ],
+    [ "ultrasonic1:TRIG", "esp:4", "green", [ "h-124.8", "v316.4" ] ],
+    [ "ultrasonic1:ECHO", "esp:2", "green", [ "h-105.6", "v325.6" ] ],
+    [ "led1:A", "bb1:6b.g", "", [ "$bb" ] ],
+    [ "led1:C", "bb1:5b.g", "", [ "$bb" ] ],
+    [ "led2:A", "bb1:9b.g", "", [ "$bb" ] ],
+    [ "led2:C", "bb1:8b.g", "", [ "$bb" ] ],
+    [ "led3:A", "bb1:12b.g", "", [ "$bb" ] ],
+    [ "led3:C", "bb1:11b.g", "", [ "$bb" ] ],
+    [ "bb1:6b.h", "esp:21", "green", [ "v163.2", "h153.6", "v124.8" ] ],
+    [ "bb1:9b.h", "esp:19", "green", [ "v144", "h153.6", "v163.2" ] ],
+    [ "bb1:12b.h", "esp:18", "green", [ "v124.8", "h144", "v192" ] ]
+  ],
+  "dependencies": {},
+  "wifi": {
+    "ssid": "Wokwi-GUEST",
+    "password": "",
+    "channel": 6
+  }
+}
